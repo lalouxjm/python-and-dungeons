@@ -1,3 +1,4 @@
+from combat import fight
 from hero import create_hero, gain_xp, display_hero
 from items import add_item, use_item, get_rare_items, show_inventory
 
@@ -43,3 +44,6 @@ if __name__ == '__main__':
     add_item(my_hero, "Health Potion")
     add_item(my_hero, "Iron Shield")
     show_inventory(my_hero)
+
+    won = fight(my_hero, "Giant Spider")
+    display_hero(my_hero)
