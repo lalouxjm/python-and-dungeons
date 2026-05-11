@@ -9,6 +9,7 @@ ITEMS = {
     "Antidote":       {"type": "cure",    "value": 0,   "rarity": "common",    "one_use": True},
 }
 
+# Add an item from the items dict
 def add_item(hero: dict, item_name: str) -> None:
     try:
         if item_name in ITEMS.keys():
@@ -18,7 +19,7 @@ def add_item(hero: dict, item_name: str) -> None:
     except ValueError:
         print(f"{item_name} does not exist")
 
-def use_item(hero: dict, item_name: str) -> None:
+def use_item1(hero: dict, item_name: str) -> None:
     if item_name not in ITEMS.keys():
         raise ValueError
     try:
@@ -61,3 +62,77 @@ def use_item(hero: dict, item_name: str) -> None:
             print("not in inventory")
     except ValueError:
         print(f"{item_name} does not exist")
+
+def check_item(hero: dict, item_name: str):
+    # check if item exists in global ITEMS
+    if item_name not in ITEMS.keys():
+        print(f"{item_name} does not exist")
+        return
+
+    # find item in inventory
+    inventory_item = None
+
+    for name, data in hero["inventory"]:
+        if name == item_name:
+            inventory_item = (name, data)
+            break
+
+    # item not found
+    if inventory_item is None:
+        print(f"{item_name} not in inventory")
+
+    return inventory_item
+
+# Use an item from the hero inventory
+def use_item(hero: dict, item_name: str) -> None:
+
+    inventory_item = check_item(hero, item_name)
+
+    name, item = inventory_item
+    item_value = item["value"]
+    print(f"{item_name} has been used.")
+
+    # HEAL
+    if item["type"] == "heal":
+        hero["hp"] = min(hero["hp"] + item_value, hero["max_hp"])
+        #hero["hp"] += item_value
+        #if hero["hp"] > hero["max_hp"]:
+            #hero["hp"] = hero["max_hp"]
+
+        print(f"You recovered {item_value} HP.")
+
+    # ATTACK
+    if item["type"] == "attack":
+        hero["attack"] += item_value
+        print(f"You gained {item_value} attack points.")
+
+    # DEFENSE
+    if item["type"] == "defense":
+        hero["defense"] += item_value
+        print(f"You gained {item_value} defense points.")
+
+    # CURE
+    if item["type"] == "cure":
+        if "POISONED" in hero["buffs"]:
+            hero["buffs"].remove("POISONED")
+            print("You are no longer poisoned.")
+        else:
+            print("You are not poisoned.")
+
+    # SPECIAL
+    if item["type"] == "special":
+        if "DRAGON_CROWNED" not in hero["buffs"]:
+            hero["buffs"].add("DRAGON_CROWNED")
+            print("You gained the buff Dragon Crowned.")
+        else:
+            print("You already have that buff.")
+
+    # remove if consumable
+    if item["one_use"]:
+        hero["inventory"].remove(inventory_item)
+        print(f"{item_name} has been removed from your inventory.")
+
+def get_rare_items(hero: dict) -> list:
+    rare_list = []
+
+    return rare_list
