@@ -1,4 +1,5 @@
 from hero import create_hero, gain_xp, display_hero
+from items import add_item, use_item
 
 
 ## FUNCTION
@@ -17,4 +18,8 @@ if __name__ == '__main__':
     gain_xp(my_hero, 45)
     print(my_hero)
     display_hero(my_hero)
-
+    add_item(my_hero, "Spell Tome")
+    add_item(my_hero, "Elixir of Rage")
+    add_item(my_hero, "Dragon Crown")
+    use_item(my_hero, "Dragon Crown")
+    display_hero(my_hero)

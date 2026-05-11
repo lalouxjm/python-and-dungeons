@@ -65,7 +65,3 @@ def display_hero(hero: dict):
     print('║', f' ATK:{get_stat_triplets(hero)[0]:<2} - DEF: {get_stat_triplets(hero)[1]:<2} - XP: {get_stat_triplets(hero)[2]:<4}', '║')
     print('║', f' BUFF: {buffs_str:<21}','║')
     print('╚' + '═' * 30 + '╝')
-
-
-if __name__ == '__main__':
-    print('hero')
