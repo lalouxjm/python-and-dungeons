@@ -1,5 +1,5 @@
 from hero import create_hero, gain_xp, display_hero
-from items import add_item, use_item
+from items import add_item, use_item, get_rare_items, show_inventory
 
 
 ## FUNCTION
@@ -10,16 +10,36 @@ def print_hi(name):
 
 ## MAIN
 if __name__ == '__main__':
+
+    print("create hero")
     my_hero = create_hero("Sir JMi")
-    print(my_hero)
     display_hero(my_hero)
+
+    print("+30xp")
     gain_xp(my_hero, 30)
-    print(my_hero)
-    gain_xp(my_hero, 45)
-    print(my_hero)
     display_hero(my_hero)
+
+    print("+45xp")
+    gain_xp(my_hero, 45)
+    display_hero(my_hero)
+
     add_item(my_hero, "Spell Tome")
     add_item(my_hero, "Elixir of Rage")
     add_item(my_hero, "Dragon Crown")
+    show_inventory(my_hero)
+    get_rare_items(my_hero)
+
     use_item(my_hero, "Dragon Crown")
     display_hero(my_hero)
+
+    use_item(my_hero, "Spell Tome")
+    display_hero(my_hero)
+
+    use_item(my_hero, "Elixir of Rage")
+    display_hero(my_hero)
+    show_inventory(my_hero)
+
+
+    add_item(my_hero, "Health Potion")
+    add_item(my_hero, "Iron Shield")
+    show_inventory(my_hero)
