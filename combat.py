@@ -2,6 +2,8 @@ import copy
 import random
 
 import my_func
+from hero import gain_xp
+from items import add_item
 
 ENEMIES = {
     "Giant Spider": {
@@ -50,17 +52,23 @@ def resolve_turn(hero: dict, enemy: dict) -> tuple:
         hero["hp"] -= e_dmg
         print(my_func.red(f"{enemy["name"]} deals {e_dmg} damage(s) to {hero["name"]}."))
         if hero["hp"] <= 0:
-            print(my_func.red("You died!"))
+            print(my_func.red("💀 You died! 💀"))
     else:
         enemy["hp"] = 0
-        print(my_func.green(f"{enemy["name"]} has been defeated!"))
+        print(my_func.green(f"💀 {enemy["name"]} has been defeated!"))
+        gain_xp(hero, enemy["xp_reward"])
+        loot_item(hero, enemy)
 
     return hero, enemy
 
+def loot_item(hero, enemy):
+    print(f"You looted {enemy['name']} and received {enemy['loot']}.")
+    add_item(hero, enemy["loot"])
+
 def mini_status(hero, enemy):
     print(my_func.blue("Fight Status:"),
-          my_func.green(f"{hero["name"]} - {hero["hp"]}/{hero["max_hp"]}hp"), " --- ",
-          my_func.red(f"{enemy["name"]} - {enemy["hp"]}/{enemy["max_hp"]}hp"))
+          my_func.green(f"{hero["name"]} - 💚 {hero["hp"]}/{hero["max_hp"]}hp"), " --- ",
+          my_func.red(f"{enemy["name"]} - ❤️ {enemy["hp"]}/{enemy["max_hp"]}hp"))
 
 def fight(hero: dict, enemy_name: str) -> bool:
     enemy = copy.deepcopy(ENEMIES[enemy_name])

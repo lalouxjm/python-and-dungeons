@@ -16,11 +16,9 @@ if __name__ == '__main__':
     my_hero = create_hero("Sir JMi")
     display_hero(my_hero)
 
-    print("+30xp")
     gain_xp(my_hero, 30)
     display_hero(my_hero)
 
-    print("+45xp")
     gain_xp(my_hero, 45)
     display_hero(my_hero)
 

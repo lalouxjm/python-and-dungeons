@@ -1,3 +1,5 @@
+import my_func
+
 
 ## FUNCTION
 
@@ -24,6 +26,7 @@ def gain_xp(hero: dict, amount: int) -> bool:
     lvl_up:bool = False
     hero_xp:int = hero["xp"]
     xp_for_lvl_up:int = hero['level'] * 40
+    print(my_func.green(f"You gain {amount}xp⭐!"))
 
 
     if hero_xp + amount >= xp_for_lvl_up:
@@ -34,7 +37,7 @@ def gain_xp(hero: dict, amount: int) -> bool:
         hero['max_hp'] += 15
         hero['attack'] += 3
         hero['defense'] += 1
-        print(f"Congratz! You lvl up! You reached lvl {hero['level']}")
+        print(my_func.green(f"Congratz! You lvl up! You reached lvl {hero['level']} 🆙"))
         if remaining >= xp_for_lvl_up:
             gain_xp(hero, remaining)
         else:
@@ -59,9 +62,9 @@ def display_hero(hero: dict):
     buffs = hero['buffs']
     buffs_str = ', '.join(buffs) if buffs else 'None'
 
-    print('╔' + '═' * 30 + '╗')
-    print('║', f' {hero["name"]} - LvL {hero["level"]:<13}' ,    '║')
-    print('║', f' HP [{hp_bar}]  {hero['hp']}/{hero['max_hp']:<6}',  '║')
-    print('║', f' ATK:{get_stat_triplets(hero)[0]:<2} - DEF: {get_stat_triplets(hero)[1]:<2} - XP: {get_stat_triplets(hero)[2]:<4}', '║')
-    print('║', f' BUFF: {buffs_str:<21}','║')
-    print('╚' + '═' * 30 + '╝')
+    print(my_func.yellow('╔' + '═' * 30 + '╗'))
+    print(my_func.yellow('║', f' {hero["name"]} - LvL {hero["level"]:<15}' ,    '║'))
+    print(my_func.yellow('║', ' HP ', my_func.red(f'[{hp_bar}]'),my_func.yellow(f'  {hero['hp']}/{hero['max_hp']:<8}'),  my_func.yellow('║')))
+    print(my_func.yellow('║', f' ATK: {get_stat_triplets(hero)[0]:<2} - DEF: {get_stat_triplets(hero)[1]:<2} - XP: {get_stat_triplets(hero)[2]:<5}', '║'))
+    print(my_func.yellow('║', f' BUFF: {buffs_str:<23}','║'))
+    print(my_func.yellow('╚' + '═' * 30 + '╝'))

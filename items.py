@@ -167,7 +167,7 @@ def show_inventory(hero: dict) -> None:
             else:
                 common += f", {name}"
     if legendary or epic or rare or common:
-        print(my_func.blue("==INVENTORY=="))
+        print(my_func.blue("💰==INVENTORY==💰"))
     if legendary:
         print(f"Legendary: {legendary}")
     if epic:
